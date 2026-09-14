@@ -1,4 +1,4 @@
-﻿# 📺 HoverTV
+# 📺 HoverTV
 
 **HoverTV** is a retro CRT desktop video companion application. It renders video playback through an authentic WebGL2 cathode-ray tube shader simulation—complete with phosphor glow, scanlines, barrel distortion curvature, chromatic aberration, analog static noise, and rotary dial controls.
 
@@ -100,39 +100,58 @@ powershell -ExecutionPolicy Bypass -File scripts\register-nm-host.ps1
 
 ---
 
-## Developer Guide
+## Developer Guide & Terminal Commands
 
 ### Prerequisites
 - Node.js 18+ and `pnpm`
 - Rust toolchain (`cargo`, `rustc`)
 - Portable MSVC toolchain / C++ build environment
 
-### Running in Development
+### 1. Install Dependencies
 ```powershell
-# 1. Install dependencies
-cd tauri-app && pnpm install
-cd ../extension && pnpm install
+# Install Node dependencies for the frontend
+cd tauri-app
+pnpm install
 
-# 2. Build the extension
-cd ../extension && pnpm run build
-
-# 3. Launch the desktop app in dev mode
-cd ../tauri-app && pnpm tauri dev
+# Install Node dependencies for the browser extension
+cd ../extension
+pnpm install
 ```
 
-### Running Automated Tests
+### 2. Build & Package the Extension
 ```powershell
-# Extension unit tests
-cd extension && pnpm test
+# Go back to the root of the project
+cd ..
 
-# Frontend unit tests
-cd tauri-app && pnpm test
-
-# Rust backend unit tests
-cd tauri-app/src-tauri && cargo test
+# Build and package the extension into a zip file
+powershell -ExecutionPolicy Bypass -File scripts\package-extension.ps1
+# (The packaged zip will be at extension/hovertv-extension-v0.1.0.zip)
 ```
 
-### Building for Release
+### 3. Run the Desktop App (Development Mode)
+```powershell
+cd tauri-app
+pnpm tauri dev
+```
+
+### 4. Run Automated Test Suites
+```powershell
+# Run Browser Extension Unit Tests
+cd extension
+pnpm test
+
+# Run Frontend WebGL/State Unit Tests
+cd ../tauri-app
+pnpm test
+
+# Run Rust Backend Native Messaging Unit Tests
+cd src-tauri
+$env:PATH = "D:\Extras\ES\msvc\Windows Kits\10\bin\10.0.19041.0\x64;$env:PATH"
+$env:RC = "D:\Extras\ES\msvc\Windows Kits\10\bin\10.0.19041.0\x64\rc.exe"
+cargo test
+```
+
+### 5. Building for Release
 ```powershell
 # Package extension into distributable .zip
 powershell -File scripts\package-extension.ps1
