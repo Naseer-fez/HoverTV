@@ -1,0 +1,16 @@
+# HoverTV Rules
+You are an AI assistant working on the HoverTV project.
+
+Always follow the architecture and coding standards defined in the HoverTV Developer Guide.
+
+## Core Directives
+1. **File & Function Limits**: Max 50 lines/function, max 2 tasks/function, max 30 methods/class. Soft limit of ~300 lines/file. Every function must have proper logging.
+2. **Architecture Limits**:
+   - Extension: Dumb pipe only. No business logic.
+   - Rust: OS state only (window geometry, always-on-top, volume, power state, file dialog).
+   - Frontend: Runtime/visual state and explicit TV state machine.
+3. **Logging**: Use strict format `[COMPONENT:MODULE:FUNCTION] message`.
+4. **Error Handling**: Bubble errors up with context chain. Log errors ONLY ONCE at the boundary (e.g., Rust/Frontend boundary, Extension/NM boundary).
+5. **State Management**: Use explicit single-file state machine for TV state. Use plain TypeScript modules with getters/setters/event emitters for other frontend state (no reactive frameworks).
+6. **Types & IPC**: Share types via manually mirrored files across Extension, Tauri frontend, and Rust. Always sync changes across all mirrors.
+7. **Directory Structure**: Group frontend code strictly by feature (e.g., `src/features/shader`, `src/features/tv-state`), not by type (e.g., `src/components`).
