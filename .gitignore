@@ -1,0 +1,17 @@
+﻿node_modules/
+dist/
+target/
+*.log
+.DS_Store
+.env
+package-lock.json
+pnpm-lock.yaml
+
+# Extension outputs
+extension/dist/
+extension/*.zip
+extension/staging/
+
+# Tauri/Rust
+tauri-app/src-tauri/target/
+tauri-app/dist/

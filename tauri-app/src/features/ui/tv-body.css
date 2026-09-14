@@ -1,0 +1,446 @@
+/* HoverTV Retro CRT TV Body Styling - Phase 5 Polish */
+
+:root {
+  --wood-base: #351c0e;
+  --wood-dark: #221107;
+  --wood-grain: #462714;
+  --wood-highlight: #5a331a;
+  --bezel-outer: #1c1c1c;
+  --bezel-mid: #141414;
+  --bezel-inner: #0b0b0b;
+  --gold-accent: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-dark: #997a15;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#app-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Authentic Vintage Wood-Grain Cabinet */
+#tv-body {
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      172deg,
+      rgba(0, 0, 0, 0.06) 0px,
+      rgba(0, 0, 0, 0.06) 2px,
+      transparent 2px,
+      transparent 7px
+    ),
+    radial-gradient(ellipse at 50% 25%, rgba(210, 140, 80, 0.18) 0%, transparent 75%),
+    linear-gradient(145deg, var(--wood-highlight) 0%, var(--wood-base) 45%, var(--wood-dark) 100%);
+  border: 5px solid #1c0e06;
+  border-radius: 26px;
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.85),
+    inset 0 2px 4px rgba(255, 220, 180, 0.25),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7);
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+  position: relative;
+  cursor: grab;
+}
+
+#tv-body:active {
+  cursor: grabbing;
+}
+
+/* Deep Molded CRT Bezel & Screen Housing */
+#screen-housing {
+  flex: 1;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(circle at 50% 50%, var(--bezel-inner) 0%, var(--bezel-mid) 75%, var(--bezel-outer) 100%);
+  border: 14px solid #141414;
+  border-radius: 28px;
+  box-shadow:
+    inset 0 10px 24px rgba(0, 0, 0, 0.95),
+    inset 0 -6px 14px rgba(0, 0, 0, 0.8),
+    inset 6px 0 14px rgba(0, 0, 0, 0.8),
+    inset -6px 0 14px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(255, 255, 255, 0.07),
+    0 -1px 2px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  transition: aspect-ratio 0.25s ease-out;
+}
+
+#crt-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 14px;
+  background: #000;
+}
+
+#video-element {
+  display: none;
+}
+
+/* Multi-layer Bulbous Glass Reflection */
+.glass-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 25% 18%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 40%, transparent 68%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 28%, transparent 36%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0%, transparent 25%);
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+/* Right Control Panel */
+#tv-controls {
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(180deg, #1f150e 0%, #150d08 100%);
+  border-radius: 12px;
+  border: 2px solid #28190f;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(255, 255, 255, 0.06);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: default;
+}
+
+.brand-plate {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--gold-accent);
+  background: linear-gradient(180deg, #18110a 0%, #0d0905 100%);
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid #4a341f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 220, 160, 0.15);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.knob-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.knob-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ba9e89;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+/* Machined Vintage Rotary Knobs */
+.rotary-knob {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #4a4a4a 0%, #282828 55%, #131313 100%);
+  border: 2px solid #0d0d0d;
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.75),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    inset 0 0 0 3px #181818,
+    inset 0 0 0 5px #2d2d2d,
+    inset 0 0 0 7px #161616;
+  position: relative;
+  cursor: ns-resize;
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.rotary-knob:hover {
+  filter: brightness(1.1);
+}
+
+.rotary-knob:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.85),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 3px #121212,
+    inset 0 0 0 5px #222222,
+    inset 0 0 0 7px #101010;
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 3px;
+  height: 15px;
+  background: linear-gradient(90deg, var(--gold-accent), var(--gold-light) 50%, var(--gold-dark));
+  border-radius: 2px;
+  margin-left: -1.5px;
+  transform-origin: 1.5px 21px;
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
+  transition: transform 0.05s ease-out;
+}
+
+.knob-tooltip {
+  position: absolute;
+  bottom: -22px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(14, 10, 7, 0.92);
+  border: 1px solid #4a341f;
+  color: var(--gold-light);
+  padding: 2px 7px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+/* Power Section: Push Button & Illuminated LED */
+.power-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.power-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #505050, #222222 70%, #111111 100%);
+  border: 2px solid #0d0d0d;
+  color: #ff5252;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.28);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.power-button:hover {
+  filter: brightness(1.15);
+}
+
+.power-button:active {
+  transform: translateY(2px) scale(0.95);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.8),
+    inset 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.power-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.power-led.on {
+  background: radial-gradient(circle at 35% 35%, #95de64, #52c41a 60%, #237804 100%);
+  box-shadow: 0 0 8px #52c41a, 0 0 16px rgba(82, 196, 26, 0.7), inset 0 1px 1px #fff;
+  border: 1px solid #389e0d;
+}
+
+.power-led.off,
+.power-led:not(.on) {
+  background: radial-gradient(circle at 35% 35%, #4a1010, #1f0505 80%);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
+  border: 1px solid #140404;
+}
+
+/* Speaker Grille */
+.speaker-grille {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 85%;
+}
+
+.speaker-slit {
+  height: 3px;
+  background: #0d0805;
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 1px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Resize Handles */
+.resize-handle {
+  position: absolute;
+  z-index: 100;
+}
+
+.handle-n { top: 0; left: 16px; right: 16px; height: 10px; cursor: n-resize; }
+.handle-s { bottom: 0; left: 16px; right: 16px; height: 10px; cursor: s-resize; }
+.handle-e { top: 16px; bottom: 16px; right: 0; width: 10px; cursor: e-resize; }
+.handle-w { top: 16px; bottom: 16px; left: 0; width: 10px; cursor: w-resize; }
+.handle-ne { top: 0; right: 0; width: 16px; height: 16px; cursor: ne-resize; }
+.handle-nw { top: 0; left: 0; width: 16px; height: 16px; cursor: nw-resize; }
+.handle-se { bottom: 0; right: 0; width: 16px; height: 16px; cursor: se-resize; }
+.handle-sw { bottom: 0; left: 0; width: 16px; height: 16px; cursor: sw-resize; }
+
+/* Right-Click Context Menu */
+#context-menu {
+  position: fixed;
+  display: none;
+  background: #18120e;
+  border: 1px solid #4a341f;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 205px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  color: #e6dfdb;
+  font-size: 13px;
+}
+
+.menu-header {
+  padding: 4px 14px 6px;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.menu-section-label {
+  padding: 4px 14px;
+  font-size: 11px;
+  color: #9c897d;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #2d1f16;
+}
+
+.sub-item {
+  padding-left: 24px;
+  font-size: 12px;
+}
+
+.menu-separator {
+  height: 1px;
+  background: #38271a;
+  margin: 6px 0;
+}
+
+.slider-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-item input {
+  width: 100px;
+}
+
+.danger-item {
+  color: #ff7875;
+}
+
+.danger-item:hover {
+  background: #421616;
+}
+
+/* On-Screen Seek Bar for Local Files */
+.seek-bar-container {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  padding: 8px 12px;
+  background: rgba(18, 12, 9, 0.85);
+  border: 1px solid rgba(156, 137, 125, 0.4);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  pointer-events: none;
+}
+
+#screen-housing:hover .seek-bar-container {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.seek-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #38271a;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.seek-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #d4a373;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.seek-bar-time {
+  font-family: monospace;
+  font-size: 10px;
+  color: #d4a373;
+  text-align: right;
+  letter-spacing: 0.5px;
+}

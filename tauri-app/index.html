@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HoverTV</title>
+  <link rel="stylesheet" href="/src/features/ui/tv-body.css" />
+</head>
+<body>
+  <div id="app-container">
+    <div id="tv-body">
+      <!-- Screen Area -->
+      <div id="screen-housing">
+        <canvas id="crt-canvas"></canvas>
+        <video id="video-element" playsinline></video>
+        <div class="glass-reflection"></div>
+      </div>
+
+      <!-- Retro Control Panel -->
+      <div id="tv-controls">
+        <div class="brand-plate">HOVER-TV</div>
+
+        <div class="knob-container">
+          <div class="knob-label">CRT FX</div>
+          <div class="rotary-knob" id="knob-intensity">
+            <div class="knob-indicator"></div>
+            <div class="knob-tooltip">CRT: 70%</div>
+          </div>
+        </div>
+
+        <div class="knob-container">
+          <div class="knob-label">COLOR</div>
+          <div class="rotary-knob" id="knob-temp">
+            <div class="knob-indicator"></div>
+            <div class="knob-tooltip">Neutral</div>
+          </div>
+        </div>
+
+        <div class="power-section">
+          <div class="power-led"></div>
+          <button class="power-button" id="btn-power" title="Power">⏻</button>
+        </div>
+
+        <div class="speaker-grille">
+          <div class="speaker-slit"></div>
+          <div class="speaker-slit"></div>
+          <div class="speaker-slit"></div>
+          <div class="speaker-slit"></div>
+          <div class="speaker-slit"></div>
+          <div class="speaker-slit"></div>
+        </div>
+      </div>
+
+      <!-- Resize Handles -->
+      <div class="resize-handle handle-n" data-direction="North"></div>
+      <div class="resize-handle handle-s" data-direction="South"></div>
+      <div class="resize-handle handle-e" data-direction="East"></div>
+      <div class="resize-handle handle-w" data-direction="West"></div>
+      <div class="resize-handle handle-ne" data-direction="NorthEast"></div>
+      <div class="resize-handle handle-nw" data-direction="NorthWest"></div>
+      <div class="resize-handle handle-se" data-direction="SouthEast"></div>
+      <div class="resize-handle handle-sw" data-direction="SouthWest"></div>
+    </div>
+  </div>
+
+  <!-- Custom Context Menu -->
+  <div id="context-menu"></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
