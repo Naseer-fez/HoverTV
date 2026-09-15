@@ -59,6 +59,10 @@ function renderMenuItems(): string {
       <span>📂 Open Local Video...</span>
     </div>
     <div class="menu-separator"></div>
+    <div class="menu-item" id="menu-about">
+      <span>ℹ️ About HoverTV</span>
+    </div>
+    <div class="menu-separator"></div>
     <div class="menu-item danger-item" id="menu-quit">
       <span>Power Off & Quit</span>
     </div>
@@ -92,6 +96,13 @@ function bindMenuEvents(container: HTMLElement): void {
     logInfo('ui', 'contextMenu', 'User clicked Open File');
     hideMenu();
     await invokeOpenFileDialog();
+  });
+
+  const aboutBtn = container.querySelector<HTMLElement>('#menu-about');
+  aboutBtn?.addEventListener('click', () => {
+    logInfo('ui', 'contextMenu', 'User clicked About');
+    hideMenu();
+    window.alert('📺 HoverTV v0.1.0\nRetro CRT Desktop Video Companion\n\n© 2026 Shaik Naseer John Ahmed\nMIT License');
   });
 
   const quitBtn = container.querySelector<HTMLElement>('#menu-quit');

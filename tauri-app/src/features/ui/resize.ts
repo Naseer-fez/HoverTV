@@ -11,10 +11,11 @@ type ResizeDirection =
   | 'SouthWest'
   | 'West';
 
-export function setupWindowResize(container: HTMLElement): void {
+export function setupWindowResize(container?: HTMLElement): void {
   logInfo('ui', 'setupWindowResize', 'Configuring window resize handles');
 
-  const handles = container.querySelectorAll<HTMLElement>('.resize-handle');
+  const root = container ?? document;
+  const handles = root.querySelectorAll<HTMLElement>('.resize-handle');
   handles.forEach((handle) => {
     handle.addEventListener('mousedown', async (e: MouseEvent) => {
       if (e.button !== 0) return;

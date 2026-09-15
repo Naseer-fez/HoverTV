@@ -8,16 +8,17 @@
 </head>
 <body>
   <div id="app-container">
-    <div id="tv-body">
+    <div id="tv-body" data-tauri-drag-region>
       <!-- Screen Area -->
-      <div id="screen-housing">
+      <div id="screen-housing" data-tauri-drag-region="false">
         <canvas id="crt-canvas"></canvas>
         <video id="video-element" playsinline></video>
+        <iframe id="youtube-frame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="glass-reflection"></div>
       </div>
 
       <!-- Retro Control Panel -->
-      <div id="tv-controls">
+      <div id="tv-controls" data-tauri-drag-region="false">
         <div class="brand-plate">HOVER-TV</div>
 
         <div class="knob-container">
@@ -50,17 +51,17 @@
           <div class="speaker-slit"></div>
         </div>
       </div>
-
-      <!-- Resize Handles -->
-      <div class="resize-handle handle-n" data-direction="North"></div>
-      <div class="resize-handle handle-s" data-direction="South"></div>
-      <div class="resize-handle handle-e" data-direction="East"></div>
-      <div class="resize-handle handle-w" data-direction="West"></div>
-      <div class="resize-handle handle-ne" data-direction="NorthEast"></div>
-      <div class="resize-handle handle-nw" data-direction="NorthWest"></div>
-      <div class="resize-handle handle-se" data-direction="SouthEast"></div>
-      <div class="resize-handle handle-sw" data-direction="SouthWest"></div>
     </div>
+
+    <!-- Resize Handles -->
+    <div class="resize-handle handle-n" data-direction="North"></div>
+    <div class="resize-handle handle-s" data-direction="South"></div>
+    <div class="resize-handle handle-e" data-direction="East"></div>
+    <div class="resize-handle handle-w" data-direction="West"></div>
+    <div class="resize-handle handle-ne" data-direction="NorthEast"></div>
+    <div class="resize-handle handle-nw" data-direction="NorthWest"></div>
+    <div class="resize-handle handle-se" data-direction="SouthEast"></div>
+    <div class="resize-handle handle-sw" data-direction="SouthWest"></div>
   </div>
 
   <!-- Custom Context Menu -->

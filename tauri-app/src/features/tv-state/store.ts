@@ -3,11 +3,24 @@ import { logInfo } from '../../core/utils/logger';
 
 type StateListener = (state: TVState, prev: TVState) => void;
 
+export interface PendingVideo {
+  url: string;
+  title?: string;
+  source: 'youtube' | 'html5' | 'local';
+}
+
+type PendingVideoConsumer = (video: PendingVideo) => void;
+
 let currentState: TVState = TVState.OFF;
 let activeVideoUrl: string | null = null;
 let activeVideoTitle: string | null = null;
-let pendingVideo: { url: string; title?: string; source: 'youtube' | 'html5' | 'local' } | null = null;
+let pendingVideo: PendingVideo | null = null;
 const listeners: Set<StateListener> = new Set();
+let pendingVideoConsumer: PendingVideoConsumer | null = null;
+
+export function onPendingVideoConsumed(consumer: PendingVideoConsumer): void {
+  pendingVideoConsumer = consumer;
+}
 
 export function getState(): TVState {
   return currentState;
@@ -46,10 +59,17 @@ export function dispatch(event: TVEvent): TVState {
       pendingVideo = null;
       queueMicrotask(() => {
         dispatch({ type: 'RECEIVE_VIDEO', ...video });
+        if (pendingVideoConsumer) {
+          pendingVideoConsumer(video);
+        }
       });
     }
   }
   return currentState;
+}
+
+export function hasPendingVideo(): boolean {
+  return pendingVideo !== null;
 }
 
 export function onStateChange(listener: StateListener): () => void {

@@ -1,12 +1,12 @@
 import { logInfo, logBoundaryError } from './core/utils/logger';
 import { setupIpcListeners } from './core/ipc/tauri-bridge';
-import { initVideoPlayer } from './features/video-player/player';
+import { initVideoPlayer, stopPlayback, playUrl } from './features/video-player/player';
 import { initRenderer } from './features/shader/renderer';
 import { setupWindowDrag } from './features/ui/drag';
 import { setupWindowResize } from './features/ui/resize';
 import { setupKnobs } from './features/ui/knobs';
 import { setupContextMenu } from './features/ui/context-menu';
-import { dispatch, getState, onStateChange } from './features/tv-state/store';
+import { dispatch, getState, onStateChange, onPendingVideoConsumed } from './features/tv-state/store';
 import { initAnimations } from './features/tv-state/animations';
 import { initAspectRatio } from './features/ui/aspect-ratio';
 import { TVState } from './features/tv-state/state-machine';
@@ -34,7 +34,7 @@ function updatePowerLed(state: TVState): void {
 
 function initUIInteractions(tvBody: HTMLElement): void {
   setupWindowDrag(tvBody);
-  setupWindowResize(tvBody);
+  setupWindowResize();
   setupKnobs(tvBody);
   setupContextMenu(tvBody);
 
@@ -45,13 +45,24 @@ function initUIInteractions(tvBody: HTMLElement): void {
   });
 
   updatePowerLed(getState());
-  onStateChange(updatePowerLed);
+  onStateChange((state) => {
+    updatePowerLed(state);
+    if (state === TVState.OFF || state === TVState.POWERING_OFF) {
+      stopPlayback();
+    }
+  });
+
+  onPendingVideoConsumed((video) => {
+    logInfo('main', 'onPendingVideoConsumed', `Playing consumed pending video: ${video.url} (${video.source})`);
+    playUrl(video.url, video.source);
+  });
 }
 
 async function bootstrap(): Promise<void> {
   logInfo('main', 'bootstrap', 'Bootstrapping HoverTV application');
   const canvas = document.getElementById('crt-canvas') as HTMLCanvasElement;
   const video = document.getElementById('video-element') as HTMLVideoElement;
+  const youtubeFrame = document.getElementById('youtube-frame') as HTMLIFrameElement | null;
   const tvBody = document.getElementById('tv-body') as HTMLElement;
   const screenHousing = document.getElementById('screen-housing') as HTMLElement;
 
@@ -63,9 +74,10 @@ async function bootstrap(): Promise<void> {
   resizeCanvasToDisplaySize(canvas);
   window.addEventListener('resize', () => resizeCanvasToDisplaySize(canvas));
 
-  initVideoPlayer(video);
-  initRenderer(canvas, video);
+  initVideoPlayer(video, youtubeFrame);
+  await initRenderer(canvas, video);
   initAnimations();
+  dispatch({ type: 'POWER_TOGGLE' });
 
   if (screenHousing) {
     initAspectRatio(video, screenHousing);

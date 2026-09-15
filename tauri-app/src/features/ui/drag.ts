@@ -1,22 +1,7 @@
-import { getCurrentWindow } from '@tauri-apps/api/window';
-import { logInfo, logBoundaryError } from '../../core/utils/logger';
+import { logInfo } from '../../core/utils/logger';
 
-export function setupWindowDrag(tvBody: HTMLElement): void {
-  logInfo('ui', 'setupWindowDrag', 'Configuring window drag handler');
-
-  tvBody.addEventListener('mousedown', async (e: MouseEvent) => {
-    // Only primary mouse button and not inside controls or context menu
-    if (e.button !== 0) return;
-    const target = e.target as HTMLElement;
-    if (target.closest('#tv-controls') || target.closest('#context-menu') || target.closest('.resize-handle')) {
-      return;
-    }
-
-    try {
-      logInfo('ui', 'onMouseDown', 'Initiating Tauri window drag');
-      await getCurrentWindow().startDragging();
-    } catch (err) {
-      logBoundaryError('ui', 'setupWindowDrag', err, 'Failed to start window drag');
-    }
-  });
+export function setupWindowDrag(_tvBody: HTMLElement): void {
+  logInfo('ui', 'setupWindowDrag', 'Configuring window drag handler (using native data-tauri-drag-region)');
+  // Programmatic startDragging() is removed in favor of data-tauri-drag-region
+  // attribute in index.html to prevent WebView2 event conflicts on Windows.
 }
