@@ -12,6 +12,8 @@ import { initAspectRatio } from './features/ui/aspect-ratio';
 import { TVState } from './features/tv-state/state-machine';
 import { initLocalFileListener } from './features/video-player/local-file';
 import { initSeekBar } from './features/video-player/seek-bar';
+import { invoke } from '@tauri-apps/api/core';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 function resizeCanvasToDisplaySize(canvas: HTMLCanvasElement): void {
   const width = canvas.clientWidth * window.devicePixelRatio;
@@ -38,10 +40,25 @@ function initUIInteractions(tvBody: HTMLElement): void {
   setupKnobs(tvBody);
   setupContextMenu(tvBody);
 
+  let clickCount = 0;
+  let clickTimer: ReturnType<typeof setTimeout> | null = null;
+
   const powerBtn = document.getElementById('btn-power');
-  powerBtn?.addEventListener('click', () => {
-    logInfo('main', 'powerClick', 'Power button clicked');
-    dispatch({ type: 'POWER_TOGGLE' });
+  powerBtn?.addEventListener('click', async () => {
+    clickCount++;
+    if (clickTimer) clearTimeout(clickTimer);
+    
+    clickTimer = setTimeout(async () => {
+      logInfo('main', 'powerClick', `Power button clicked ${clickCount} times`);
+      if (clickCount === 1) {
+        dispatch({ type: 'POWER_TOGGLE' });
+      } else if (clickCount === 2) {
+        getCurrentWindow().minimize();
+      } else if (clickCount >= 3) {
+        invoke('exit_app');
+      }
+      clickCount = 0;
+    }, 400);
   });
 
   updatePowerLed(getState());

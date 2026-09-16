@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Video extraction helpers for HoverTV browser extension.
  * Structured log format: [EXT:extractors:FUNCTION]
  */
@@ -37,6 +37,16 @@ export function extractYouTubeUrl(locationObj?: LocationLike): string | null {
     if (shortId) {
       logInfo('extractors', 'extractYouTubeUrl', `Found shorts ID: ${shortId}`);
       return `https://www.youtube.com/watch?v=${shortId}`;
+    }
+  }
+
+  if (loc.pathname.includes('/embed/')) {
+    const parts = loc.pathname.split('/');
+    const embedIdx = parts.indexOf('embed');
+    const embedId = parts[embedIdx + 1];
+    if (embedId) {
+      logInfo('extractors', 'extractYouTubeUrl', `Found embed ID: ${embedId}`);
+      return `https://www.youtube.com/watch?v=${embedId}`;
     }
   }
 

@@ -25,11 +25,15 @@ async function applyAspectRatio(ratio: number, housing: HTMLElement): Promise<vo
   housing.style.aspectRatio = `${ratio.toFixed(4)}`;
 
   try {
-    const currentSize = await getCurrentWindow().innerSize();
+    const window = getCurrentWindow();
+    const factor = await window.scaleFactor();
+    const physicalSize = await window.innerSize();
+    const currentSize = physicalSize.toLogical(factor);
+    
     const dims = computeWindowDimensions(ratio, currentSize.height);
 
     logInfo('aspect-ratio', 'applyAspectRatio', `Resizing window to ${dims.width}x${dims.height}`);
-    await getCurrentWindow().setSize(new LogicalSize(dims.width, dims.height));
+    await window.setSize(new LogicalSize(dims.width, dims.height));
   } catch (err) {
     logBoundaryError('aspect-ratio', 'applyAspectRatio', err, 'Failed resizing window');
   }
@@ -47,9 +51,8 @@ export function initAspectRatio(video: HTMLVideoElement, housing: HTMLElement): 
 
   onStateChange((state) => {
     if (state === TVState.STATIC || state === TVState.OFF) {
-      logInfo('aspect-ratio', 'onStateChange', 'Resetting to default 4:3 ratio');
-      housing.style.aspectRatio = `${DEFAULT_ASPECT_RATIO}`;
-      getCurrentWindow().setSize(new LogicalSize(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT)).catch(() => {});
+      logInfo('aspect-ratio', 'onStateChange', 'Resetting to default 4:3 ratio based on current height');
+      applyAspectRatio(DEFAULT_ASPECT_RATIO, housing);
     }
   });
 }

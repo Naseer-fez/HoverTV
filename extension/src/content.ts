@@ -15,7 +15,7 @@ interface VideoInfo {
 }
 
 function queryShadowVideos(root: Document | ShadowRoot | Element, depth = 0): HTMLVideoElement[] {
-  if (depth > 3) return [];
+  if (depth > 10) return [];
   const results: HTMLVideoElement[] = Array.from(root.querySelectorAll<HTMLVideoElement>('video'));
 
   const elements = root.querySelectorAll('*');
@@ -206,3 +206,36 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   }
   return true;
 });
+
+function checkAlreadyPlayingVideos() {
+  const videos = findVideosOnPage();
+  for (const v of videos) {
+    if (!v.paused && !v.ended) {
+      logInfo('content-script', 'autoDetect', 'Found already playing video on load');
+      const info = extractVideoSource(v);
+      if (info) {
+        pipeVideo(info);
+        return; // Only pipe the first playing one
+      }
+    }
+  }
+}
+
+// Initial scan
+checkAlreadyPlayingVideos();
+
+// Global play event listener using capture phase to catch shadow DOM events
+document.addEventListener('play', (e) => {
+  if (isSelectModeActive) return;
+  
+  const path = e.composedPath();
+  const video = path.find(el => (el as Element).tagName === 'VIDEO') as HTMLVideoElement | undefined;
+  
+  if (video && video !== activeVideoElement) {
+    logInfo('content-script', 'autoDetect', 'Auto-detected playing video via event');
+    const info = extractVideoSource(video);
+    if (info) {
+      pipeVideo(info);
+    }
+  }
+}, true);

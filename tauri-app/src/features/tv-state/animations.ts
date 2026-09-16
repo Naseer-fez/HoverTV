@@ -88,9 +88,8 @@ function playPowerOff(): void {
     () => {
       setAnimPhase(8);
       setAnimProgress(0);
-      logInfo('tv-state', 'playPowerOff', 'Power-off sequence finished, exiting app');
+      logInfo('tv-state', 'playPowerOff', 'Power-off sequence finished');
       dispatch({ type: 'ANIMATION_COMPLETE' });
-      invokePowerOff();
     },
     TVState.POWERING_OFF
   );

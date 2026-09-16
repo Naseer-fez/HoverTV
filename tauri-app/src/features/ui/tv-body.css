@@ -162,15 +162,17 @@ html, body {
 
 /* Right Control Panel */
 #tv-controls {
-  width: 110px;
+  width: 18vmin;
+  min-width: 60px;
+  max-width: 140px;
   height: 100%;
   background: linear-gradient(180deg, #1f150e 0%, #150d08 100%);
-  border-radius: 12px;
-  border: 2px solid #28190f;
+  border-radius: 2vmin;
+  border: 0.3vmin solid #28190f;
   box-shadow:
-    inset 0 2px 6px rgba(0, 0, 0, 0.8),
-    0 1px 2px rgba(255, 255, 255, 0.06);
-  padding: 12px 8px;
+    inset 0 0.3vmin 1vmin rgba(0, 0, 0, 0.8),
+    0 0.15vmin 0.3vmin rgba(255, 255, 255, 0.06);
+  padding: 2vmin 1.3vmin;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,16 +181,16 @@ html, body {
 }
 
 .brand-plate {
-  font-size: 10px;
+  font-size: 1.6vmin;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 0.3vmin;
   color: var(--gold-accent);
   background: linear-gradient(180deg, #18110a 0%, #0d0905 100%);
-  padding: 4px 10px;
-  border-radius: 3px;
-  border: 1px solid #4a341f;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 220, 160, 0.15);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+  padding: 0.6vmin 1.6vmin;
+  border-radius: 0.5vmin;
+  border: 0.15vmin solid #4a341f;
+  box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.7), inset 0 0.15vmin 0.15vmin rgba(255, 220, 160, 0.15);
+  text-shadow: 0 0.15vmin 0.3vmin rgba(0, 0, 0, 0.9);
 }
 
 .knob-container {
@@ -199,27 +201,27 @@ html, body {
 }
 
 .knob-label {
-  font-size: 9px;
+  font-size: 1.4vmin;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.1vmin;
   color: #ba9e89;
-  margin-bottom: 5px;
+  margin-bottom: 0.8vmin;
   text-transform: uppercase;
 }
 
 /* Machined Vintage Rotary Knobs */
 .rotary-knob {
-  width: 50px;
-  height: 50px;
+  width: 8vmin;
+  height: 8vmin;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 38%, #4a4a4a 0%, #282828 55%, #131313 100%);
-  border: 2px solid #0d0d0d;
+  border: 0.3vmin solid #0d0d0d;
   box-shadow:
-    0 5px 12px rgba(0, 0, 0, 0.75),
-    inset 0 1px 2px rgba(255, 255, 255, 0.35),
-    inset 0 0 0 3px #181818,
-    inset 0 0 0 5px #2d2d2d,
-    inset 0 0 0 7px #161616;
+    0 0.8vmin 2vmin rgba(0, 0, 0, 0.75),
+    inset 0 0.15vmin 0.3vmin rgba(255, 255, 255, 0.35),
+    inset 0 0 0 0.5vmin #181818,
+    inset 0 0 0 0.8vmin #2d2d2d,
+    inset 0 0 0 1.1vmin #161616;
   position: relative;
   cursor: ns-resize;
   transition: filter 0.15s, transform 0.1s;
@@ -232,37 +234,37 @@ html, body {
 .rotary-knob:active {
   transform: scale(0.97);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.85),
-    inset 0 1px 2px rgba(255, 255, 255, 0.2),
-    inset 0 0 0 3px #121212,
-    inset 0 0 0 5px #222222,
-    inset 0 0 0 7px #101010;
+    0 0.3vmin 1vmin rgba(0, 0, 0, 0.85),
+    inset 0 0.15vmin 0.3vmin rgba(255, 255, 255, 0.2),
+    inset 0 0 0 0.5vmin #121212,
+    inset 0 0 0 0.8vmin #222222,
+    inset 0 0 0 1.1vmin #101010;
 }
 
 .knob-indicator {
   position: absolute;
-  top: 4px;
+  top: 0.6vmin;
   left: 50%;
-  width: 3px;
-  height: 15px;
+  width: 0.5vmin;
+  height: 2.4vmin;
   background: linear-gradient(90deg, var(--gold-accent), var(--gold-light) 50%, var(--gold-dark));
-  border-radius: 2px;
-  margin-left: -1.5px;
-  transform-origin: 1.5px 21px;
-  box-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
+  border-radius: 0.3vmin;
+  margin-left: -0.25vmin;
+  transform-origin: 0.25vmin 3.4vmin;
+  box-shadow: 0 0 0.6vmin rgba(212, 175, 55, 0.6);
   transition: transform 0.05s ease-out;
 }
 
 .knob-tooltip {
   position: absolute;
-  bottom: -22px;
-  font-size: 10px;
+  bottom: -3.5vmin;
+  font-size: 1.6vmin;
   font-weight: 600;
   background: rgba(14, 10, 7, 0.92);
-  border: 1px solid #4a341f;
+  border: 0.15vmin solid #4a341f;
   color: var(--gold-light);
-  padding: 2px 7px;
-  border-radius: 4px;
+  padding: 0.3vmin 1.1vmin;
+  border-radius: 0.6vmin;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
@@ -275,25 +277,25 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 0.8vmin;
 }
 
 .power-button {
-  width: 34px;
-  height: 34px;
+  width: 5.5vmin;
+  height: 5.5vmin;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 38%, #505050, #222222 70%, #111111 100%);
-  border: 2px solid #0d0d0d;
+  border: 0.3vmin solid #0d0d0d;
   color: #ff5252;
-  font-size: 14px;
+  font-size: 2.2vmin;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.65),
-    inset 0 1px 2px rgba(255, 255, 255, 0.28);
+    0 0.6vmin 1.3vmin rgba(0, 0, 0, 0.65),
+    inset 0 0.15vmin 0.3vmin rgba(255, 255, 255, 0.28);
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
@@ -302,47 +304,47 @@ html, body {
 }
 
 .power-button:active {
-  transform: translateY(2px) scale(0.95);
+  transform: translateY(0.3vmin) scale(0.95);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.8),
-    inset 0 2px 5px rgba(0, 0, 0, 0.8);
+    0 0.15vmin 0.5vmin rgba(0, 0, 0, 0.8),
+    inset 0 0.3vmin 0.8vmin rgba(0, 0, 0, 0.8);
 }
 
 .power-led {
-  width: 8px;
-  height: 8px;
+  width: 1.3vmin;
+  height: 1.3vmin;
   border-radius: 50%;
   transition: background 0.25s, box-shadow 0.25s;
 }
 
 .power-led.on {
   background: radial-gradient(circle at 35% 35%, #95de64, #52c41a 60%, #237804 100%);
-  box-shadow: 0 0 8px #52c41a, 0 0 16px rgba(82, 196, 26, 0.7), inset 0 1px 1px #fff;
-  border: 1px solid #389e0d;
+  box-shadow: 0 0 1.3vmin #52c41a, 0 0 2.5vmin rgba(82, 196, 26, 0.7), inset 0 0.15vmin 0.15vmin #fff;
+  border: 0.15vmin solid #389e0d;
 }
 
 .power-led.off,
 .power-led:not(.on) {
   background: radial-gradient(circle at 35% 35%, #4a1010, #1f0505 80%);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
-  border: 1px solid #140404;
+  box-shadow: inset 0 0.15vmin 0.15vmin rgba(0, 0, 0, 0.8);
+  border: 0.15vmin solid #140404;
 }
 
 /* Speaker Grille */
 .speaker-grille {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.5vmin;
   width: 85%;
 }
 
 .speaker-slit {
-  height: 3px;
+  height: 0.5vmin;
   background: #0d0805;
-  border-radius: 1px;
+  border-radius: 0.15vmin;
   box-shadow:
-    inset 0 1px 1px rgba(0, 0, 0, 0.9),
-    0 1px 0 rgba(255, 255, 255, 0.06);
+    inset 0 0.15vmin 0.15vmin rgba(0, 0, 0, 0.9),
+    0 0.15vmin 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Resize Handles */

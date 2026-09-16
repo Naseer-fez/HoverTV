@@ -17,6 +17,12 @@ function handleExtensionMessage(msg: ExtensionMessage): void {
     logInfo('ipc', 'handleExtensionMessage', `Handling IPC message: ${msg.type}`);
     switch (msg.type) {
       case 'PLAY_URL':
+        import('@tauri-apps/api/window').then(({ getCurrentWindow }) => {
+          const win = getCurrentWindow();
+          win.unminimize().catch(() => {});
+          win.show().catch(() => {});
+          win.setFocus().catch(() => {});
+        });
         dispatch({ type: 'RECEIVE_VIDEO', url: msg.url, title: msg.title, source: msg.source });
         playUrl(msg.url, msg.source);
         break;
