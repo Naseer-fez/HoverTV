@@ -80,6 +80,7 @@ pub fn start_native_messaging_listener(app_handle: AppHandle) {
                 }
                 Err(err) => {
                     log_error!("native_messaging", "handle_stdin", "NM message processing failed | {}", err);
+                    break;
                 }
             }
         }

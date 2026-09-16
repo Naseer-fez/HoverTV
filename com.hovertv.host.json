@@ -1,9 +1,9 @@
-{
-  "name": "com.hovertv.host",
-  "description": "HoverTV Native Messaging Host",
-  "path": "d:\\CODE\\Utlities\\Hovertv\\tauri-app\\src-tauri\\target\\debug\\hovertv.exe",
-  "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://*/"
-  ]
+﻿{
+    "name":  "com.hovertv.host",
+    "description":  "HoverTV Native Messaging Host",
+    "path":  "D:\\CODE\\Utlities\\Hovertv\\tauri-app\\src-tauri\\target\\debug\\hovertv.exe",
+    "type":  "stdio",
+    "allowed_origins":  [
+                            "chrome-extension://klbepgedfdbncbcmklnlehhlcgjbahac/"
+                        ]
 }

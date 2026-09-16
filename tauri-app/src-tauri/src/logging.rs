@@ -4,7 +4,7 @@
 #[macro_export]
 macro_rules! log_info {
     ($module:expr, $func:expr, $($arg:tt)*) => {
-        println!("[RUST:{}:{}] {}", $module, $func, format_args!($($arg)*))
+        eprintln!("[RUST:{}:{}] {}", $module, $func, format_args!($($arg)*))
     };
 }
 
